@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -27,7 +28,6 @@ import java.util.List;
 public class MapActivity extends AppCompatActivity {
     public LocationClient mLocationClient;
 
-    private TextView positionText;
 
     private MapView mapView;
 
@@ -45,7 +45,6 @@ public class MapActivity extends AppCompatActivity {
         mapView = (MapView) findViewById(R.id.bmapView);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
-        positionText = (TextView) findViewById(R.id.position_text_view);
         List<String> permissionList = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -66,7 +65,7 @@ public class MapActivity extends AppCompatActivity {
     }
     private void navigateTo(BDLocation location) {
         if (isFirstLocate) {
-            Toast.makeText(this, "nav to " + location.getAddrStr(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "我的位置"+ location.getAddrStr(), Toast.LENGTH_SHORT).show();
             LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
             MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
             baiduMap.animateMapStatus(update);
@@ -89,6 +88,7 @@ public class MapActivity extends AppCompatActivity {
         LocationClientOption option = new LocationClientOption();
         option.setScanSpan(5000);
         option.setIsNeedAddress(true);
+        option.setCoorType("bd09ll");
         mLocationClient.setLocOption(option);
     }
     @Override
@@ -129,7 +129,7 @@ public class MapActivity extends AppCompatActivity {
             default:
         }
     }
-    public class MyLocationListener implements BDLocationListener {
+    public class MyLocationListener extends BDAbstractLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation location) {
