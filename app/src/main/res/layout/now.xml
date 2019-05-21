@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:background="@mipmap/icon_location"
+        android:id="@+id/location"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:text="查看我的位置"
+        android:textColor="#fff"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:textSize="10dp"
+        android:layout_width="70dp"
+        android:layout_height="15dp" />
+<TextView
+    android:id="@+id/degree_text"
+    android:layout_gravity="end"
+    android:textColor="#fff"
+    android:textSize="60sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
+<TextView
+    android:id="@+id/weather_info_text"
+    android:textColor="#fff"
+    android:textSize="20sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/speak"
+        android:background="@mipmap/speak"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="-175dp"
+         />
+    <ImageView
+        android:background="@drawable/play_anim"
+        android:id="@+id/play_anim"
+        android:layout_marginTop="-28dp"
+        android:layout_marginLeft="290dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp" />
+</LinearLayout>
