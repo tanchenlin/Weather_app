@@ -8,6 +8,7 @@ import com.example.weather_app2.db.Province;
 import com.example.weather_app2.gson.Weather;
 import com.example.weather_app2.gson.Weather2;
 import com.example.weather_app2.gson.Weather3;
+import com.example.weather_app2.gson.Weather4;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -99,6 +100,17 @@ public class Utility {
             JSONArray jsonArray=jsonObject.getJSONArray("HeWeather6");
             String weatherContent=jsonArray.getJSONObject(0).toString();
             return new Gson().fromJson(weatherContent,Weather3.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static Weather4 handleWeatherResponse4(String response){
+        try {
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather6");
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather4.class);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -83,6 +83,7 @@ public class  ChooseAreaFragment extends Fragment {
                         activity.requestWeather(weatherId);
                         activity.requestWeather2(weatherId);
                         activity.requestWeather3(weatherId);
+                        activity.requestWeather4(weatherId);
                     }
                 }
             }

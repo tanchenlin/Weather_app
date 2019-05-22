@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import com.example.weather_app2.gson.Weather;
 import com.example.weather_app2.gson.Weather2;
 import com.example.weather_app2.gson.Weather3;
+import com.example.weather_app2.gson.Weather4;
 import com.example.weather_app2.util.HttpUtil;
 import com.example.weather_app2.util.Utility;
 
@@ -47,6 +48,7 @@ public class AutoUpdateService extends Service {
         String weatherString=preferences.getString("weather",null);
         String weatherString2=preferences.getString("weather2",null);
         String weatherString3=preferences.getString("weather3",null);
+        String weatherString4=preferences.getString("weather4",null);
         if (weatherString!=null){
             Weather weather= Utility.handleWeatherResponse(weatherString);
             String weatherId=weather.basic.weatherId;
@@ -111,6 +113,30 @@ public class AutoUpdateService extends Service {
                         editor.putString("weather3",responseText3);
                         editor.apply();
                     }
+                }
+            });
+        }
+        if (weatherString4!=null){
+            Weather4 weather4=Utility.handleWeatherResponse4(weatherString4);
+            String weatherId4=weather4.basic.weatherId;
+            String weatherUrl="https://free-api.heweather.net/s6/weather/hourly?location="+weatherId4+"&key=7aa063924dec4fe3a2264895da5245ca";
+            HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String responseText4=response.body().string();
+                    Weather4 weather4=Utility.handleWeatherResponse4(responseText4);
+                    if (weather4!=null&&"ok".equals(weather4.status)){
+                        SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this)
+                                .edit();
+                        editor.putString("weather4",responseText4);
+                        editor.apply();
+                    }
+
                 }
             });
         }
